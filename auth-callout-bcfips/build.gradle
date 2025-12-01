@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenLocal() // TODO: remove once dependencies are released
+    mavenCentral()
+    maven { url "https://repo1.maven.org/maven2/" }
+    maven { url "https://central.sonatype.com/repository/maven-snapshots" }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', '../auth-callout/src/main/java']
+        }
+    }
+}
+
+dependencies {
+    implementation('io.nats:nkeys-java:2.1.2-SNAPSHOT') {
+        // To use BouncyCastle FIPS, we first need to exclude the standard BouncyCastle library
+        exclude group: 'org.bouncycastle'
+    }
+    implementation 'io.nats:jnats-json:2.22.0'
+    implementation 'io.nats:jwt-java:2.2.0'
+    implementation('io.nats:jnats:2.24.1') {
+        // To use BouncyCastle FIPS, we first need to exclude the standard BouncyCastle library
+        exclude group: 'org.bouncycastle'
+    }
+    // After excluding the normal edition we can include the FIPS edition, here a debug version
+    implementation("org.bouncycastle:bc-fips-debug:2.1.2")
+    testImplementation(platform('org.junit:junit-bom:5.8.2'))
+    testImplementation('org.junit.jupiter:junit-jupiter')
+}
