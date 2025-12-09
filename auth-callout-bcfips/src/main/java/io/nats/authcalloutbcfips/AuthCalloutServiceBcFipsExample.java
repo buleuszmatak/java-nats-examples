@@ -13,11 +13,11 @@ public class AuthCalloutServiceBcFipsExample {
         setupBcFips();
 
         // Normally set via JVM argument:
-        // -Dio.nats.client.security.provider=BCFIPS
-        System.setProperty("io.nats.client.security.provider", PROVIDER_NAME);
+        // -Dio.nats.nkey.security.provider=BCFIPS
+        System.setProperty("io.nats.nkey.security.provider", PROVIDER_NAME);
         // or
-        // -Dio.nats.client.security.provider
-        // System.setProperty("io.nats.client.security.provider", "");
+        // -Dio.nats.nkey.security.provider
+        // System.setProperty("io.nats.nkey.security.provider", "");
         // if BCFIPS is configured as the default provider
 
         AuthCalloutServiceExample.main(args);
